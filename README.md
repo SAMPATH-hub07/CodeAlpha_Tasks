@@ -1,20 +1,24 @@
 # ZIP Code EDA Project
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-This project contains a synthetic dataset of ZIP codes, cities, states, and user counts.
-The analysis is performed in a Jupyter Notebook.
+# Load sample dataset
+df = sns.load_dataset('titanic')
 
-## Files
-- `sample_zip_data.csv`: Synthetic dataset
-- `zip_code_eda.ipynb`: EDA notebook
-- `README.md`: Project description
+# Basic info
+print(df.info())
+print(df.describe())
 
-## Requirements
-- Python
-- pandas
-- matplotlib
-- seaborn
+# Check missing values
+print(df.isnull().sum())
 
-To run the notebook:
-```bash
-jupyter notebook zip_code_eda.ipynb
-```
+# Visualize survival rate by sex
+sns.countplot(x='sex', hue='survived', data=df)
+plt.title('Survival Rate by Sex')
+plt.show()
+
+# Correlation heatmap
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.title('Correlation Heatmap')
+plt.show()
